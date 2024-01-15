@@ -1,20 +1,17 @@
 package ru.mavist.urava;
 
 import android.content.Intent;
-import android.util.DisplayMetrics;
-import android.util.Log;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import com.yandex.mobile.ads.banner.BannerAdSize;
 import com.yandex.mobile.ads.banner.BannerAdView;
 import com.yandex.mobile.ads.common.*;
 import com.yandex.mobile.ads.rewarded.*;
-import kotlin.reflect.KType;
 
 import static java.lang.Math.sqrt;
 
@@ -27,18 +24,11 @@ public class MainActivity extends AppCompatActivity {
     public MainActivity() {
         super(R.layout.activity_main);
     }
-
     TextView itogo;
-
     EditText a11, b11, c11;
     long d, a1, b1, c1;
     double x1, x2;
-
     String ans;
-    // banner
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -212,10 +202,6 @@ public class MainActivity extends AppCompatActivity {
             mRewardedAd.setAdEventListener(null);
             mRewardedAd = null;
         }
-    }
-
-    public static int rand(int a, int b) {
-        return a + (int) (Math.random() * b);
     }
 
 }

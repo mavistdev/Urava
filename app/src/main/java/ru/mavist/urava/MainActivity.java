@@ -35,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
     double x1, x2;
 
     String ans;
+    // banner
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,12 @@ public class MainActivity extends AppCompatActivity {
         a11 = findViewById(R.id.editTextNumber);
         b11 = findViewById(R.id.editTextNumber2);
         c11 = findViewById(R.id.editTextNumber3);
+        setreklama("demo-banner-yandex", 500);
+        MobileAds.initialize(this, new InitializationListener() {
+            @Override
+            public void onInitializationCompleted() {}
+        });
+
 
         // Ads loading should occur after initialization of the SDK.
         // Initialize SDK as early as possible, for example in Application.onCreate or Activity.onCreate
@@ -90,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onAdDismissed() {
                     // Called when ad is dismissed.
                     // Clean resources after Ad dismissed
-                    itogo.setText("Вы не посмотрели рекламу");
+//                    itogo.setText("Вы не посмотрели рекламу");
                     if (mRewardedAd != null) {
                         mRewardedAd.setAdEventListener(null);
                         mRewardedAd = null;
@@ -131,11 +140,10 @@ public class MainActivity extends AppCompatActivity {
     private void loadRewardedAd() {
         if (mRewardedAdLoader != null ) {
             final AdRequestConfiguration adRequestConfiguration =
-                    new AdRequestConfiguration.Builder("R-M-5227679-1").build();
+                    new AdRequestConfiguration.Builder("R-M-5227679-2").build();
             mRewardedAdLoader.loadAd(adRequestConfiguration);
         }
     }
-
 
     public void clc(View v){
         try {
@@ -180,6 +188,15 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void setreklama(String baner, int size){
+
+        BannerAdView mBannerAdView = findViewById(R.id.bannerAdView);
+        mBannerAdView.setAdUnitId(baner);
+        mBannerAdView.setAdSize(BannerAdSize.stickySize(this, size));
+        final AdRequest adRequest = new AdRequest.Builder().build();
+        mBannerAdView.loadAd(adRequest);
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -195,6 +212,10 @@ public class MainActivity extends AppCompatActivity {
             mRewardedAd.setAdEventListener(null);
             mRewardedAd = null;
         }
+    }
+
+    public static int rand(int a, int b) {
+        return a + (int) (Math.random() * b);
     }
 
 }

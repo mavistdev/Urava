@@ -2,6 +2,7 @@ package ru.mavist.urava;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         a11 = findViewById(R.id.editTextNumber);
         b11 = findViewById(R.id.editTextNumber2);
         c11 = findViewById(R.id.editTextNumber3);
-        setreklama("demo-banner-yandex", 500);
+        setreklama("R-M-5227679-2", 500);
         MobileAds.initialize(this, new InitializationListener() {
             @Override
             public void onInitializationCompleted() {}
@@ -130,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
     private void loadRewardedAd() {
         if (mRewardedAdLoader != null ) {
             final AdRequestConfiguration adRequestConfiguration =
-                    new AdRequestConfiguration.Builder("R-M-5227679-2").build();
+                    new AdRequestConfiguration.Builder("R-M-5227679-1").build();
             mRewardedAdLoader.loadAd(adRequestConfiguration);
         }
     }
@@ -144,7 +145,12 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e){
             itogo.setText("Ошибка значений. Возможно вы ввели не все значения. \nЕсли что-то равно нулю - впишите это");
         }
-        showAd();
+
+        int a = rand(0, 15);
+        if(a >= 13){
+            showAd();
+            Log.d("RANDOM", String.valueOf(a));
+        }
     }
 
     public void answer(long a, long b, long c){
@@ -179,7 +185,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setreklama(String baner, int size){
-
         BannerAdView mBannerAdView = findViewById(R.id.bannerAdView);
         mBannerAdView.setAdUnitId(baner);
         mBannerAdView.setAdSize(BannerAdSize.stickySize(this, size));
@@ -202,6 +207,10 @@ public class MainActivity extends AppCompatActivity {
             mRewardedAd.setAdEventListener(null);
             mRewardedAd = null;
         }
+    }
+
+    public static int rand(int a, int b) {
+        return a + (int) (Math.random() * b);
     }
 
 }
